@@ -1,0 +1,65 @@
+'use client';
+import PropTypes from 'prop-types';
+
+// @next
+import NextLink from 'next/link';
+
+// @mui
+import { useTheme } from '@mui/material/styles';
+import Grid from '@mui/material/Grid';
+import MenuItem from '@mui/material/MenuItem';
+import MenuList from '@mui/material/MenuList';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
+
+// @project
+import { linkComponentProps } from '@/utils/anchorScroll';
+import { generateFocusVisibleStyles } from '@/utils/CommonFocusStyle';
+
+/***************************  FOOTER - SITEMAP  ***************************/
+
+/**
+ * Las columnas del pie de página llegan siempre por la prop `list` (ver Footer7).
+ * Cada entrada de `menu` puede llevar `link` para ser un enlace, o quedarse como texto plano.
+ */
+export default function Sitemap({ list = [], isMenuDesign }) {
+  const theme = useTheme();
+
+  const menuItemStyle = {
+    color: 'text.secondary',
+    justifyContent: 'flex-start',
+    px: 0,
+    minHeight: { xs: 36, sm: 40 },
+    '&:hover': { color: 'primary.main', bgcolor: 'transparent' },
+    '&.Mui-focusVisible': { bgcolor: 'transparent', ...generateFocusVisibleStyles(theme.vars.palette.primary.main) }
+  };
+
+  return (
+    <Grid container spacing={{ xs: 2.5, md: 4 }} sx={{ justifyContent: 'space-between' }}>
+      {list.map((item, index) => (
+        <Grid key={index} {...item.grid}>
+          <Stack sx={{ alignItems: 'flex-start', gap: { md: 3 } }}>
+            <Typography variant="h4">{item.title}</Typography>
+            <MenuList>
+              {item?.menu &&
+                item?.menu.map((menu, i) => (
+                  <MenuItem
+                    key={i}
+                    disableRipple
+                    sx={{ ...menuItemStyle, ...(isMenuDesign && { typography: 'caption2', fontWeight: 400, my: 0.25 }) }}
+                    {...(menu.link && { ...menu.link, ...linkComponentProps(menu.link.href, NextLink) })}
+                    tabIndex={0}
+                    aria-label={menu.label}
+                  >
+                    {menu.label}
+                  </MenuItem>
+                ))}
+            </MenuList>
+          </Stack>
+        </Grid>
+      ))}
+    </Grid>
+  );
+}
+
+Sitemap.propTypes = { list: PropTypes.array, isMenuDesign: PropTypes.bool };

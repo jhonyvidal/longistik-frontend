@@ -1,0 +1,30 @@
+{
+  "brandName": "Longistik",
+  "title": "Software de transporte de carga conectado al RNDC",
+  "company": {
+    "name": "DEBUGPLOY S.A.S.",
+    "nit": "901714840-3",
+    "email": "servicioalcliente@debugploy.com",
+    "city": "Palmira",
+    "state": "Valle del Cauca",
+    "country": "Colombia",
+    "url": "/",
+    "socialLink": {
+      "linkedin": "",
+      "instagram": "",
+      "facebook": "",
+      "youtube": "",
+      "github": ""
+    }
+  },
+  "contact": {
+    "whatsapp": "",
+    "phone": ""
+  },
+  "logo": {
+    "main": "/assets/images/longistik/logo.png",
+    "logoIcon": "/assets/images/longistik/icon.png",
+    "logoFab": "",
+    "logoWatermark": ""
+  }
+}
