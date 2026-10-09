@@ -29,16 +29,16 @@ export const hero = {
   },
   headLine: 'Cumple con el RNDC sin pelear con el RNDC',
   captionLine:
-    'Longistik genera tus guías, manifiestos y cumplidos desde una interfaz moderna y los reporta automáticamente al Ministerio de Transporte. Sin digitar dos veces y sin errores que nadie entiende.',
+    'Longistik genera tus guías, manifiestos y cumplidos, los reporta solo al Ministerio de Transporte y los conecta con tu facturación electrónica, tu contabilidad y el sistema de tus clientes. Sin digitar dos veces y sin errores que nadie entiende.',
   primaryBtn: { ...ctaDemo },
   secondaryBtn: { children: 'Ver los módulos', href: ANCHOR.modulos },
   listData: [
     { icon: 'tabler-file-text', title: 'Guías' },
     { icon: 'tabler-receipt', title: 'Manifiestos' },
     { icon: 'tabler-clipboard-check', title: 'Cumplidos' },
-    { icon: 'tabler-truck', title: 'Vehículos' },
-    { icon: 'tabler-id-badge-2', title: 'Terceros' },
-    { icon: 'tabler-route', title: 'Rutas' },
+    { icon: 'tabler-file-invoice', title: 'Facturación' },
+    { icon: 'tabler-plug', title: 'Integraciones' },
+    { icon: 'tabler-api', title: 'API' },
     { icon: 'tabler-chart-bar', title: 'Informes' }
   ],
   // Captura viva de la aplicación (componentes, no imagen) — ver src/components/app-mockup

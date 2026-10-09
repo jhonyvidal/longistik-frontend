@@ -30,7 +30,7 @@ No hay tests ni TypeScript (`jsconfig.json` es solo para el alias `@/*` → `./s
 
 Variables de entorno en `.env` (ver `.env.example`). Las que importan:
 `NEXT_PUBLIC_METADATA_BASE` (dominio para URLs canónicas y Open Graph — **pendiente**),
-`DEMO_WEBHOOK_URL` (destino de las solicitudes de demo — **pendiente**),
+`DEMO_API_URL` y `DEMO_API_KEY` (backend del panel que recibe las solicitudes de demo; la llave debe coincidir con el setting `demo_api_key` del panel),
 `NEXT_PUBLIC_ANALYTICS_ID` (opcional; sin él no se carga ningún script de terceros).
 
 ## Estructura del sitio
@@ -44,7 +44,7 @@ Solo 4 páginas (`src/app/(default)/`), todas con slugs en español:
 | `/politica-de-privacidad` | `.../privacy-policy.jsx` |
 | `/terminos-y-condiciones` | `.../terms-condition.jsx` |
 
-Más `src/app/api/demo/route.js` (recibe el formulario de demo: lo deja en el log del servidor y, si existe `DEMO_WEBHOOK_URL`, lo reenvía ahí).
+Más `src/app/api/demo/route.js`: proxy servidor a servidor hacia `POST /api/public/demo-requests` del backend del panel (repo ConfigPanel, contrato en `docs/demo-requests-api.md` de ese repo). Allá se valida (honeypot `website`, 5 por IP cada 10 min), se guarda el lead y se envían el aviso interno y la confirmación al prospecto. Este route reenvía la IP del visitante en `X-Client-IP` y le pasa al formulario 200/400/429 tal cual; cualquier otro error es 502.
 
 ## Paleta
 
@@ -103,8 +103,10 @@ Se usa en `data/hero.jsx` (pantalla de guías) y `data/feature.jsx` (una pantall
 
 ## Pendientes conocidos
 
-- Dominio definitivo (`NEXT_PUBLIC_METADATA_BASE`) y destino de los leads (`DEMO_WEBHOOK_URL`).
-- Número de WhatsApp en `branding.json`.
+- El dominio del sitio es **longistik.com**: falta poner `NEXT_PUBLIC_METADATA_BASE=https://longistik.com` en producción.
+- Cargar `DEMO_API_URL` y `DEMO_API_KEY` en producción (y la misma llave en el setting `demo_api_key` del panel).
+- Política de privacidad: mencionar que los datos del formulario de demo se guardan y se usan para contactar al prospecto por correo (Ley 1581 de 2012).
 - Cifras reales, testimonio y logos de clientes.
-- Precios de los planes (hoy ambos muestran "A convenir").
+- Precio del plan grande (hoy "A la medida"; el básico es "desde $650.000 COP al mes", en `data/pricing.jsx`).
+- Páginas propias para `/integraciones`, `/api` e `/implementacion` (hoy son anclas de la home), y URL pública de la documentación de la API.
 - El texto legal es un borrador y necesita revisión de un abogado.

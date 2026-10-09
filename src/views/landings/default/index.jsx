@@ -21,6 +21,7 @@ import {
   clientele,
   cta4,
   cta5,
+  ecosistema,
   faq,
   feature18,
   feature20,
@@ -69,7 +70,14 @@ export default function Main() {
         <Feature18 {...feature18} />
       </Box>
 
-      <Feature21 {...feature21} />
+      <Box component="section" id={SECTION_ID.integraciones} sx={anchorSx}>
+        <Integration2 {...ecosistema} />
+      </Box>
+
+      <Box component="section" id={SECTION_ID.api} sx={anchorSx}>
+        <Feature21 {...feature21} />
+      </Box>
+
       <Cta4 {...cta4} />
 
       {(hayTestimonios || hayLogos) && (

@@ -5,41 +5,45 @@ import { ctaDemo } from './botones';
 
 /***************************  LONGISTIK - FUNCIONALIDADES (FEATURE 20)  ***************************/
 
+/**
+ * Cada tarjeta parte de un dolor real del día a día (el que el cliente reconoce) y cierra con
+ * lo que hace Longistik. Es la narrativa "problema → solución" con la que abre la home.
+ */
 export const feature20 = {
-  heading: 'Todo lo que exige el RNDC, en un solo lugar',
-  caption: 'Cada operación queda registrada en tu sistema y reportada al Ministerio de Transporte en el mismo paso.',
+  heading: 'Si despachas carga en Colombia, esto te suena',
+  caption: 'Software hecho solo para transporte de carga, no un ERP genérico adaptado. Cada dolor de la operación tiene su solución.',
   actionBtn: { ...ctaDemo },
-  secondaryBtn: { children: 'Cómo funciona la integración', href: ANCHOR.rndc },
+  secondaryBtn: { children: 'Ver con qué se integra', href: ANCHOR.integraciones },
   features: [
     {
-      icon: 'tabler-file-text',
-      title: 'Guías con consecutivo automático',
-      content: 'Expide remesas terrestres de carga con numeración propia y envío al RNDC en el mismo momento.'
+      icon: 'tabler-copy',
+      title: 'Digitar la misma remesa dos veces',
+      content: 'La registras una sola vez en Longistik y se reporta sola al RNDC, con consecutivo automático.'
     },
     {
-      icon: 'tabler-receipt',
-      title: 'Manifiestos multiparada',
-      content: 'Arma un manifiesto con varias remesas y paradas intermedias, y liquida el flete del viaje.'
+      icon: 'tabler-alert-triangle',
+      title: 'Errores del RNDC que nadie entiende',
+      content: 'Validamos los datos antes de enviar y traducimos la respuesta del Ministerio a lenguaje claro.'
     },
     {
       icon: 'tabler-clipboard-check',
-      title: 'Cumplidos sin digitar',
-      content: 'Los horarios de cargue y descargue llegan del monitoreo GPS que ya reporta el RNDC.'
+      title: 'Cumplidos llenados a mano',
+      content: 'Las horas de cargue y descargue llegan del monitoreo GPS que ya reporta el RNDC. Solo confirmas.'
     },
     {
-      icon: 'tabler-id-badge-2',
-      title: 'Terceros y vehículos',
-      content: 'Crea y actualiza conductores, propietarios y vehículos directamente contra el RNDC.'
+      icon: 'tabler-file-invoice',
+      title: 'Facturar copiando de un sistema a otro',
+      content: 'La remesa cumplida pasa a tu facturación electrónica y a Siigo, World Office o Alegra sin transcribir.'
     },
     {
-      icon: 'tabler-shield-check',
-      title: 'Nada se pierde si el RNDC se cae',
-      content: 'La operación se guarda igual y queda marcada para reenviarla cuando el servicio vuelva.'
+      icon: 'tabler-phone',
+      title: 'Clientes llamando a preguntar por su carga',
+      content: 'Con nuestra API consultan el estado y el rastreo de cada remesa desde su propio sistema.'
     },
     {
       icon: 'tabler-chart-bar',
-      title: 'Ventas contra fletes',
-      content: 'Informes de lo que cobras y lo que pagas por cliente, vehículo, ruta o conductor.'
+      title: 'No saber si el viaje dejó plata',
+      content: 'Ventas contra fletes por cliente, vehículo, ruta o conductor, en el mismo informe.'
     }
   ]
 };
@@ -102,28 +106,33 @@ export const feature18 = {
         { primary: 'Ventas por cliente, producto y ruta' },
         { primary: 'Fletes por vehículo, conductor y propietario' },
         { primary: 'Comparativo de utilidad mes a mes' },
-        { primary: 'Exportación para contabilidad' }
+        { primary: 'Integración con Siigo, World Office y Alegra' }
       ],
       actionBtn: { ...ctaDemo }
     }
   ]
 };
 
-/***************************  LONGISTIK - CARGUE MASIVO Y API (FEATURE 21)  ***************************/
+/***************************  LONGISTIK - API PARA LOS CLIENTES (FEATURE 21)  ***************************/
 
+/**
+ * Lo que expone hoy la API de Longistik: creación, consulta y anulación de remesas, consulta por
+ * cliente, rastreo y la trazabilidad completa de la remesa desde que se crea hasta que se factura.
+ */
 export const feature21 = {
-  heading: 'Cuando el volumen crece, no crece el trabajo',
-  caption: 'Cargue masivo desde archivo y una API para que tus propios clientes radiquen sus despachos.',
+  heading: 'Tus clientes crean y rastrean sus remesas desde su propio sistema',
+  caption:
+    'Una API para que los clientes de tu transportadora radiquen despachos y sigan cada remesa, desde que se crea hasta que se factura. Menos llamadas, menos correos, más carga.',
   mockup: <AppScreen screen="dashboard" />,
   primaryBtn: { ...ctaDemo },
   features: [
-    { animationDelay: 0.1, icon: 'tabler-upload', title: 'Cargue masivo por archivo' },
-    { animationDelay: 0.2, icon: 'tabler-check', title: 'Validación antes de crear' },
-    { animationDelay: 0.3, icon: 'tabler-api', title: 'API para tus clientes' },
-    { animationDelay: 0.4, icon: 'tabler-lock', title: 'Cada cliente ve solo lo suyo' },
-    { animationDelay: 0.1, icon: 'tabler-package', title: 'Varias unidades por remesa' },
-    { animationDelay: 0.2, icon: 'tabler-world', title: 'Consulta pública de estado' },
-    { animationDelay: 0.3, icon: 'tabler-users', title: 'Roles y permisos por usuario' },
-    { animationDelay: 0.4, icon: 'tabler-printer', title: 'PDF con código de barras' }
+    { animationDelay: 0.1, icon: 'tabler-file-plus', title: 'Creación de remesas' },
+    { animationDelay: 0.2, icon: 'tabler-search', title: 'Consulta de remesas' },
+    { animationDelay: 0.3, icon: 'tabler-circle-x', title: 'Anulación de remesas' },
+    { animationDelay: 0.4, icon: 'tabler-users', title: 'Consulta por cliente' },
+    { animationDelay: 0.1, icon: 'tabler-map-pin-check', title: 'Rastreo de cada remesa' },
+    { animationDelay: 0.2, icon: 'tabler-route', title: 'Seguimiento hasta la factura' },
+    { animationDelay: 0.3, icon: 'tabler-lock', title: 'Cada cliente ve solo lo suyo' },
+    { animationDelay: 0.4, icon: 'tabler-upload', title: 'Cargue masivo por archivo' }
   ]
 };

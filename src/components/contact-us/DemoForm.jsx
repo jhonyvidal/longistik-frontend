@@ -59,7 +59,7 @@ const FLOTA = ['1 a 5 vehículos', '6 a 20 vehículos', '21 a 50 vehículos', 'M
 /***************************  FORMULARIO - SOLICITUD DE DEMO  ***************************/
 
 export default function DemoForm() {
-  // idle | sending | success | error
+  // idle | sending | success | error | limit
   const [status, setStatus] = useState('idle');
 
   const {
@@ -81,6 +81,10 @@ export default function DemoForm() {
         body: JSON.stringify(data)
       });
 
+      if (response.status === 429) {
+        setStatus('limit');
+        return;
+      }
       if (!response.ok) throw new Error('Respuesta no exitosa del servidor');
 
       setStatus('success');
@@ -199,6 +203,16 @@ export default function DemoForm() {
             </Stack>
           </Grid>
         </Grid>
+
+        {/* Honeypot: invisible para humanos; si llega con valor, la API lo trata como bot */}
+        <Box aria-hidden="true" sx={{ position: 'absolute', left: '-10000px', width: '1px', height: '1px', overflow: 'hidden' }}>
+          <label htmlFor="website">No llenar este campo</label>
+          <input id="website" type="text" tabIndex={-1} autoComplete="off" {...register('website')} />
+        </Box>
+
+        {status === 'limit' && (
+          <Alert severity="warning">Recibimos varias solicitudes desde tu conexión. Espera unos minutos e intenta de nuevo.</Alert>
+        )}
 
         {status === 'error' && (
           <Alert severity="error">

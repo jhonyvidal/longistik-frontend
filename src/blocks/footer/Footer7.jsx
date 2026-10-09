@@ -43,6 +43,8 @@ const data = [
       { label: 'Funcionalidades', link: { href: ANCHOR.funcionalidades } },
       { label: 'Módulos', link: { href: ANCHOR.modulos } },
       { label: 'Integración con el RNDC', link: { href: ANCHOR.rndc } },
+      { label: 'Integraciones', link: { href: ANCHOR.integraciones } },
+      { label: 'API para tus clientes', link: { href: ANCHOR.api } },
       { label: 'Planes', link: { href: ANCHOR.planes } }
     ]
   },

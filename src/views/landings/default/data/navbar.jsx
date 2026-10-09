@@ -1,6 +1,6 @@
 // @project
 import SvgIcon from '@/components/SvgIcon';
-import { ANCHOR, PAGE_PATH, whatsappUrl } from '@/path';
+import { ANCHOR, whatsappUrl } from '@/path';
 import { ctaDemo } from './botones';
 
 /***************************  LONGISTIK - NAVBAR  ***************************/
@@ -22,10 +22,11 @@ export const navbar = {
   }),
   primaryBtn: { ...ctaDemo },
   navItems: [
-    { id: 'inicio', title: 'Inicio', link: PAGE_PATH.home },
-    { id: 'funcionalidades', title: 'Funcionalidades', link: ANCHOR.funcionalidades },
+    // Sin "Inicio": el logo ya lleva a la home y así cabe "Integraciones" sin saturar el menú
     { id: 'modulos', title: 'Módulos', link: ANCHOR.modulos },
     { id: 'rndc', title: 'RNDC', link: ANCHOR.rndc },
+    { id: 'integraciones', title: 'Integraciones', link: ANCHOR.integraciones },
+    { id: 'api', title: 'API', link: ANCHOR.api },
     { id: 'planes', title: 'Planes', link: ANCHOR.planes },
     { id: 'faq', title: 'Preguntas', link: ANCHOR.faq }
   ]

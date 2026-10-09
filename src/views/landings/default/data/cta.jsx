@@ -17,12 +17,12 @@ export const cta4 = {
   headLine: 'Un software que ya está operando, no una promesa',
   primaryBtn: { ...ctaDemo },
   list: [
-    { primary: 'Hecho en Colombia para el RNDC colombiano' },
-    { primary: 'En producción todos los días' },
-    { primary: 'Acompañamiento en la migración' },
-    { primary: 'Soporte directo con quien desarrolla' },
-    { primary: 'Se ajusta a tu forma de operar' },
-    { primary: 'Tu información sigue siendo tuya' }
+    { primary: 'Desarrollando software desde 2017' },
+    { primary: 'Despachando carga real todos los días' },
+    { primary: 'Especialistas en transporte, no un ERP genérico' },
+    { primary: 'Integrado con RNDC, DIAN y tu contabilidad' },
+    { primary: 'Migración y acompañamiento incluidos' },
+    { primary: 'Soporte directo con quien desarrolla' }
   ],
   clientContent: 'Sin compromiso'
 };

@@ -10,7 +10,7 @@ export const faq = {
   heading: 'Preguntas frecuentes',
   caption: `Lo que más nos preguntan las empresas de transporte antes de empezar con ${branding.brandName}.`,
   defaultExpanded: primeraPregunta,
-  categories: ['RNDC', 'Producto', 'Implementación', 'Soporte'],
+  categories: ['RNDC', 'Producto', 'Integraciones', 'Implementación', 'Soporte'],
   getInTouch: {
     heading: '¿Te quedó otra duda?',
     caption: 'Escríbenos y te respondemos con un caso parecido al tuyo.',
@@ -57,10 +57,31 @@ export const faq = {
       category: 'Producto'
     },
     {
-      question: '¿Mis clientes pueden radicar sus propios despachos?',
+      question: '¿Se integra con mi facturación electrónica y mi contabilidad?',
       answer:
-        'Sí. Existe una API en la que cada cliente tuyo entra con su usuario y solo ve y crea información de las empresas que tú le asignaste. Si retiras la asignación o desactivas el usuario, el acceso se corta.',
-      category: 'Producto'
+        'Sí. Longistik se integra con la DIAN y con cualquier proveedor de facturación electrónica, y con Siigo, World Office y Alegra. La remesa cumplida pasa a facturación y a contabilidad sin que nadie la vuelva a digitar.',
+      category: 'Integraciones'
+    },
+    {
+      question: '¿Mis clientes pueden radicar sus propios despachos?',
+      answer: {
+        content:
+          'Sí. Les damos acceso a una API con la que crean y siguen sus remesas desde su propio sistema. Cada cliente entra con su usuario y solo ve la información que tú le asignaste.',
+        type: 'list',
+        data: [
+          { primary: 'Creación, consulta y anulación de remesas.' },
+          { primary: 'Consulta de todas las remesas de un cliente.' },
+          { primary: 'Rastreo de cada remesa.' },
+          { primary: 'Seguimiento completo, desde que se crea hasta que se factura.' }
+        ]
+      },
+      category: 'Integraciones'
+    },
+    {
+      question: '¿Funciona con el ERP de mis clientes?',
+      answer:
+        'Sí. Tenemos integraciones con SAP, Odoo y Salesforce, y la API sirve para conectar cualquier otro sistema. En la demo revisamos qué usan tus clientes y cómo quedaría la conexión.',
+      category: 'Integraciones'
     },
     {
       question: '¿Cuánto tarda la implementación?',
@@ -82,7 +103,7 @@ export const faq = {
     {
       question: '¿Cuánto cuesta?',
       answer:
-        'El valor depende del tamaño de tu operación y de si necesitas cargue masivo o API para tus clientes. Agenda una demo y te enviamos una propuesta concreta después de conocer cómo despachas hoy.',
+        'El plan Operación arranca desde $650.000 COP al mes, con implementación, migración y acompañamiento incluidos, y sin permanencia forzada. Si necesitas integraciones con facturación, contabilidad, ERP o API para tus clientes, te enviamos una cotización a la medida después de la demo.',
       category: 'Soporte'
     }
   ]

@@ -17,6 +17,8 @@ export const SECTION_ID = {
   funcionalidades: 'funcionalidades',
   modulos: 'modulos',
   rndc: 'rndc',
+  integraciones: 'integraciones',
+  api: 'api',
   clientes: 'clientes',
   planes: 'planes',
   faq: 'faq'

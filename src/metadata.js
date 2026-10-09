@@ -8,7 +8,7 @@ const title = `${branding.brandName} — ${branding.title}`;
 
 const description =
   'Genera guías, manifiestos y cumplidos en minutos y repórtalos automáticamente al RNDC del Ministerio de Transporte. ' +
-  'Longistik reemplaza el trabajo manual en la plataforma del RNDC por una interfaz moderna, clara y sin errores crípticos.';
+  'Integrado con la DIAN, Siigo, World Office, Alegra, SAP, Odoo y Salesforce, con API para que tus clientes creen y rastreen sus remesas.';
 
 const keywords = [
   'RNDC',
@@ -20,6 +20,12 @@ const keywords = [
   'Ministerio de Transporte',
   'cumplido de remesa',
   'software para transportadoras',
+  'facturación electrónica transporte',
+  'integración Siigo',
+  'integración World Office',
+  'integración Alegra',
+  'API de remesas',
+  'rastreo de remesas',
   'Colombia'
 ];
 
