@@ -16,3 +16,23 @@ body * {
 html {
   scroll-behavior: smooth;
 }
+
+/*
+ * Nada puede ensanchar la página. Las animaciones de entrada desplazan elementos hacia los lados
+ * (p. ej. las tarjetas de planes entran desde ±60 px) y, mientras no se ven, en el celular hacían
+ * la página más ancha que la pantalla: el navegador ampliaba el área de diseño, el navbar fijo
+ * quedaba de 434 px y el botón del menú se salía de la vista hasta llegar a esa sección.
+ * `clip` no crea un contenedor de scroll (no rompe `position: sticky`); `hidden` queda para
+ * navegadores que no soportan `clip`, solo en body: así se propaga a la ventana y el scroll
+ * sigue siendo el de window (lo usan el navbar y los botones de volver arriba).
+ */
+body {
+  overflow-x: hidden;
+}
+
+@supports (overflow-x: clip) {
+  html,
+  body {
+    overflow-x: clip;
+  }
+}

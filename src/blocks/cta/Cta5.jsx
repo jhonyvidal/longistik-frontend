@@ -100,23 +100,23 @@ export default function Cta5({ heading, caption, label, input = false, primaryBt
                     </Stack>
                   )}
                   {(primaryBtn || secondaryBtn || description) && (
-                    <Stack sx={{ alignItems: 'flex-start', gap: 1.5, width: { sm: '100%', md: '60%' }, ...(input && { mt: -6 }) }}>
+                    <Stack sx={{ alignItems: 'flex-start', gap: 1.5, width: { xs: '100%', sm: '100%', md: '60%' }, ...(input && { mt: -6 }) }}>
                       {(primaryBtn || secondaryBtn) && (
-                        <Stack direction="row" spacing={1.5} sx={{ alignItems: 'flex-start', justifyContent: 'center' }}>
+                        // En el celular los botones van uno debajo del otro y a todo el ancho (el verde primero);
+                        // lado a lado el texto se partía en dos líneas
+                        <Stack
+                          direction={{ xs: 'column-reverse', sm: 'row' }}
+                          sx={{ alignItems: { xs: 'stretch', sm: 'flex-start' }, justifyContent: 'center', gap: 1.5, width: { xs: 1, sm: 'auto' } }}
+                        >
                           {secondaryBtn && (
                             <ButtonAnimationWrapper>
-                              <Button variant="outlined" sx={{ minWidth: { sm: 170 } }} {...secondaryBtn} />
+                              <Button variant="outlined" {...secondaryBtn} sx={{ minWidth: { sm: 170 }, width: { xs: 1, sm: 'auto' } }} />
                             </ButtonAnimationWrapper>
                           )}
                           {primaryBtn && (
-                            <motion.div
-                              initial={{ opacity: 0, y: 30 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ duration: 0.3, ease: 'easeInOut' }}
-                              whileHover={{ scale: 1.06 }}
-                            >
+                            <motion.div whileHover={{ scale: 1.06 }}>
                               <ButtonAnimationWrapper>
-                                <Button variant="contained" sx={{ minWidth: { sm: 170 } }} {...primaryBtn} />
+                                <Button variant="contained" {...primaryBtn} sx={{ minWidth: { sm: 170 }, width: { xs: 1, sm: 'auto' } }} />
                               </ButtonAnimationWrapper>
                             </motion.div>
                           )}

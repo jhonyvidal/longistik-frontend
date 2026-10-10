@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 // @mui
 import { useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
@@ -40,44 +39,40 @@ import Star from '@/images/graphics/Star';
 
 export default function Feature20({ heading, caption, image, features, actionBtn, secondaryBtn }) {
   const theme = useTheme();
-  const downSM = useMediaQuery(theme.breakpoints.down('sm'));
-  const downMD = useMediaQuery(theme.breakpoints.down('md'));
-
+  // Columnas por breakpoint. Las líneas divisorias se calculan para cada uno y se aplican con sx
+  // responsivo: con useMediaQuery el servidor no conoce la pantalla y en el celular llegaban las
+  // líneas de la versión de escritorio hasta que cargaba el JavaScript.
   const partitionInExtraSmall = 1;
   const partitionInSmall = 2;
   const partitionInLarge = 3;
 
-  const columns = downSM ? partitionInExtraSmall : downMD ? partitionInSmall : partitionInLarge;
-
-  const calculateElementsInLastRow = (dataArray, columns) => {
-    const totalItems = dataArray.length;
-    const elementsInLastRow = totalItems % columns || columns;
-    return elementsInLastRow;
+  /** Para un número de columnas: ¿el elemento lleva línea abajo (no está en la última fila) y a la derecha (no es el último de su fila)? */
+  const bordes = (index, columns) => {
+    const total = features.length;
+    const enUltimaFila = index >= total - (total % columns || columns);
+    const ultimoDeSuFila = (index + 1) % columns === 0 || index === total - 1;
+    return { abajo: !enUltimaFila, derecha: !ultimoDeSuFila };
   };
 
-  const calculateIndexOfFirstElementInLastRow = (dataArray, elementsInLastRow) => {
-    const totalItems = dataArray.length;
-    const indexOfFirstElementInLastRow = totalItems - elementsInLastRow;
-    return indexOfFirstElementInLastRow;
+  const lineaSi = (condiciones) => ({
+    xs: condiciones[0] ? `1px solid ${theme.vars.palette.grey[300]}` : 'none',
+    sm: condiciones[1] ? `1px solid ${theme.vars.palette.grey[300]}` : 'none',
+    md: condiciones[2] ? `1px solid ${theme.vars.palette.grey[300]}` : 'none'
+  });
+
+  const porBreakpoint = (index) => [partitionInExtraSmall, partitionInSmall, partitionInLarge].map((columns) => bordes(index, columns));
+
+  const bordesResponsivos = (index) => {
+    const b = porBreakpoint(index);
+    return { borderBottom: lineaSi(b.map((x) => x.abajo)), borderRight: lineaSi(b.map((x) => x.derecha)) };
   };
 
-  const elementsInLastRow = calculateElementsInLastRow(features, columns);
-  const indexOfFirstElementInLastRow = calculateIndexOfFirstElementInLastRow(features, elementsInLastRow);
-
-  const calculateIndexOfLastElementOfEachRow = (dataArray, columns) => {
-    const indices = [];
-    const totalItems = dataArray.length;
-    const rows = Math.ceil(totalItems / columns);
-
-    for (let i = 1; i <= rows; i++) {
-      const lastIndexInRow = i * columns - 1;
-      indices.push(lastIndexInRow < totalItems ? lastIndexInRow : totalItems - 1);
-    }
-
-    return indices;
+  // La estrella va en el cruce de las dos líneas: solo donde el elemento tiene línea abajo y a la derecha
+  const estrellaDisplay = (index) => {
+    const [xs, sm, md] = porBreakpoint(index).map((x) => (x.abajo && x.derecha ? 'flex' : 'none'));
+    return { xs, sm, md };
   };
 
-  const indicesOfLastElements = calculateIndexOfLastElementOfEachRow(features, columns);
   const gc = theme.vars.palette.background.default;
 
   return (
@@ -130,11 +125,7 @@ export default function Feature20({ heading, caption, image, features, actionBtn
                   <Grid
                     key={index}
                     size={{ xs: 12 / partitionInExtraSmall, sm: 12 / partitionInSmall, md: 12 / partitionInLarge }}
-                    sx={{
-                      position: 'relative',
-                      ...(index < indexOfFirstElementInLastRow && { borderBottom: `1px solid ${theme.vars.palette.grey[300]}` }),
-                      ...(!indicesOfLastElements.includes(index) && { borderRight: `1px solid ${theme.vars.palette.grey[300]}` })
-                    }}
+                    sx={{ position: 'relative', ...bordesResponsivos(index) }}
                   >
                     <Stack sx={{ gap: { xs: 3, sm: 4 }, height: 1, py: { xs: 1.5, sm: 3, md: 4 }, px: { xs: 0, sm: 3, md: 4 } }}>
                       <Avatar sx={{ width: 60, height: 60, bgcolor: 'grey.300' }}>
@@ -166,11 +157,9 @@ export default function Feature20({ heading, caption, image, features, actionBtn
                         </motion.div>
                       </Stack>
                     </Stack>
-                    {index < indexOfFirstElementInLastRow && !indicesOfLastElements.includes(index) && (
-                      <Stack sx={{ position: 'absolute', bottom: -9, right: -9 }}>
-                        <Star />
-                      </Stack>
-                    )}
+                    <Stack sx={{ position: 'absolute', bottom: -9, right: -9, display: estrellaDisplay(index) }}>
+                      <Star />
+                    </Stack>
                   </Grid>
                 ))}
               </Grid>
@@ -200,35 +189,30 @@ export default function Feature20({ heading, caption, image, features, actionBtn
               delay: 0.5
             }}
           >
-            <Stack direction="row" sx={{ alignItems: 'center', justifyContent: 'center', gap: 1.5 }}>
+            {/* En el celular los botones van uno debajo del otro y del mismo ancho; lado a lado el texto se partía */}
+            <Stack
+              direction={{ xs: 'column-reverse', sm: 'row' }}
+              sx={{ alignItems: 'center', justifyContent: 'center', gap: 1.5, mx: 'auto', maxWidth: { xs: 320, sm: 'none' } }}
+            >
               {secondaryBtn && (
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, ease: 'easeInOut' }}
-                  whileHover={{ scale: 1.06 }}
-                >
+                <Box component={motion.div} whileHover={{ scale: 1.06 }} sx={{ width: { xs: 1, sm: 'auto' } }}>
                   <ButtonAnimationWrapper>
-                    <Button variant="outlined" {...secondaryBtn} />
+                    <Button variant="outlined" {...secondaryBtn} sx={{ width: { xs: 1, sm: 'auto' }, ...secondaryBtn?.sx }} />
                   </ButtonAnimationWrapper>
-                </motion.div>
+                </Box>
               )}
               {actionBtn && (
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, ease: 'easeInOut' }}
-                  whileHover={{ scale: 1.06 }}
-                >
+                <Box component={motion.div} whileHover={{ scale: 1.06 }} sx={{ width: { xs: 1, sm: 'auto' } }}>
                   <ButtonAnimationWrapper>
                     <Button
                       variant="contained"
                       color="primary"
                       startIcon={<SvgIcon name="tabler-sparkles" size={16} stroke={3} color="background.default" />}
                       {...actionBtn}
+                      sx={{ width: { xs: 1, sm: 'auto' }, ...actionBtn?.sx }}
                     />
                   </ButtonAnimationWrapper>
-                </motion.div>
+                </Box>
               )}
             </Stack>
           </motion.div>

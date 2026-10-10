@@ -33,80 +33,89 @@ import { withAlpha } from '@/utils/colorUtils';
 export default function NavbarContent10({ landingBaseUrl, navItems, primaryBtn, secondaryBtn, animated }) {
   const theme = useTheme();
 
-  const downMD = useMediaQuery(theme.breakpoints.down('md'));
+  // Solo para el desplazamiento del menú desplegable, que se abre después de cargar la página.
+  // Qué se muestra en cada tamaño se decide con CSS (`display` por breakpoint) y no con
+  // useMediaQuery: en el servidor useMediaQuery no conoce la pantalla y devolvía la versión de
+  // escritorio, así que en el celular el menú móvil no aparecía hasta que cargaba el JavaScript.
   const downSM = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <Stack direction="row" sx={{ alignItems: 'center', justifyContent: 'space-between', width: 1 }}>
       <Logo to={landingBaseUrl} />
-      {!downMD && navItems && (
-        <Box sx={{ bgcolor: 'grey.200', borderRadius: 10 }}>
+      {navItems && (
+        <Box sx={{ bgcolor: 'grey.200', borderRadius: 10, display: { xs: 'none', md: 'block' } }}>
           <NavMenu {...{ navItems }} />
         </Box>
       )}
-      <Stack direction="row" sx={{ gap: { xs: 1, md: 1.5 } }}>
-        {!downSM && (
-          <>
-            {secondaryBtn && <NavSecondaryButton {...secondaryBtn} />}
-            <ButtonAnimationWrapper>
-              {animated ? (
-                <motion.div
-                  initial={{ borderRadius: '50px' }}
-                  animate={{
-                    boxShadow: [
-                      `0px 0px 0px 0px ${withAlpha(theme.vars.palette.primary.main, 0.7)}`,
-                      `0px 0px 0px 8px ${withAlpha(theme.vars.palette.primary.main, 0)}`,
-                      `0px 0px 0px 0px ${withAlpha(theme.vars.palette.primary.main, 0)}`
-                    ],
-                    borderRadius: '50px'
-                  }}
-                  transition={{ duration: 1.2, repeat: Infinity, ease: 'linear' }}
-                >
-                  <NavPrimaryButton {...primaryBtn} />
-                </motion.div>
-              ) : (
+      <Stack direction="row" sx={{ gap: { xs: 1, md: 1.5 }, alignItems: 'center' }}>
+        <Stack direction="row" sx={{ gap: { xs: 1, md: 1.5 }, display: { xs: 'none', sm: 'flex' } }}>
+          {secondaryBtn && <NavSecondaryButton {...secondaryBtn} />}
+          <ButtonAnimationWrapper>
+            {animated ? (
+              <motion.div
+                initial={{ borderRadius: '50px' }}
+                animate={{
+                  boxShadow: [
+                    `0px 0px 0px 0px ${withAlpha(theme.vars.palette.primary.main, 0.7)}`,
+                    `0px 0px 0px 8px ${withAlpha(theme.vars.palette.primary.main, 0)}`,
+                    `0px 0px 0px 0px ${withAlpha(theme.vars.palette.primary.main, 0)}`
+                  ],
+                  borderRadius: '50px'
+                }}
+                transition={{ duration: 1.2, repeat: Infinity, ease: 'linear' }}
+              >
                 <NavPrimaryButton {...primaryBtn} />
-              )}
-            </ButtonAnimationWrapper>
-          </>
-        )}
-        {downMD && (
-          <Box sx={{ flexGrow: 1 }}>
-            <MenuPopper
-              offset={downSM ? 12 : 16}
-              toggleProps={{
-                children: <SvgIcon name="tabler-menu-2" color="text.primary" />,
-                color: 'inherit',
-                sx: { minWidth: 40, width: 40, height: 40, p: 0 }
+              </motion.div>
+            ) : (
+              <NavPrimaryButton {...primaryBtn} />
+            )}
+          </ButtonAnimationWrapper>
+        </Stack>
+        <Box sx={{ flexGrow: 1, display: { xs: 'block', md: 'none' } }}>
+          <MenuPopper
+            offset={downSM ? 12 : 16}
+            toggleProps={{
+              children: <SvgIcon name="tabler-menu-2" color="text.primary" />,
+              color: 'inherit',
+              'aria-label': 'Abrir menú',
+              sx: { minWidth: 40, width: 40, height: 40, p: 0 }
+            }}
+          >
+            <ContainerWrapper
+              sx={{
+                height: 'auto',
+                // `dvh` descuenta la barra de direcciones del móvil, que cambia de alto al hacer scroll
+                maxHeight: { xs: `calc(100dvh - ${navbar10Height.xs}px)`, sm: `calc(100dvh - ${navbar10Height.sm}px)` },
+                overflowY: 'auto',
+                // el scroll dentro del menú no se transmite a la página de fondo
+                overscrollBehavior: 'contain'
               }}
             >
-              <ContainerWrapper
+              {navItems && (
+                <Box sx={{ mx: -2 }}>
+                  <NavMenuDrawer {...{ navItems }} />
+                </Box>
+              )}
+              <Stack
+                direction="row"
                 sx={{
-                  height: 'auto',
-                  // `dvh` descuenta la barra de direcciones del móvil, que cambia de alto al hacer scroll
-                  maxHeight: { xs: `calc(100dvh - ${navbar10Height.xs}px)`, sm: `calc(100dvh - ${navbar10Height.sm}px)` },
-                  overflowY: 'auto',
-                  // el scroll dentro del menú no se transmite a la página de fondo
-                  overscrollBehavior: 'contain'
+                  justifyContent: 'space-between',
+                  gap: 1,
+                  px: 2,
+                  py: 2.5,
+                  mx: -2,
+                  bgcolor: 'grey.100',
+                  display: { xs: 'flex', sm: 'none' }
                 }}
               >
-                {navItems && (
-                  <Box sx={{ mx: -2 }}>
-                    <NavMenuDrawer {...{ navItems }} />
-                  </Box>
-                )}
-                {downSM && (
-                  <Stack direction="row" sx={{ justifyContent: 'space-between', gap: 1, px: 2, py: 2.5, mx: -2, bgcolor: 'grey.100' }}>
-                    {secondaryBtn && <NavSecondaryButton {...secondaryBtn} />}
-                    <ButtonAnimationWrapper>
-                      <NavPrimaryButton {...primaryBtn} />
-                    </ButtonAnimationWrapper>
-                  </Stack>
-                )}
-              </ContainerWrapper>
-            </MenuPopper>
-          </Box>
-        )}
+                {secondaryBtn && <NavSecondaryButton {...secondaryBtn} />}
+                <ButtonAnimationWrapper>
+                  <NavPrimaryButton {...primaryBtn} />
+                </ButtonAnimationWrapper>
+              </Stack>
+            </ContainerWrapper>
+          </MenuPopper>
+        </Box>
       </Stack>
     </Stack>
   );

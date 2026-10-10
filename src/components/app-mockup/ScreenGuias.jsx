@@ -82,8 +82,11 @@ export default function ScreenGuias() {
                   <Typography sx={{ fontSize: 10.5, fontWeight: 700, color: MOCK.text, lineHeight: 1.4 }}>{row.guia}</Typography>
                   <SubText>{row.id}</SubText>
                 </Box>
-                <Box component="td" sx={{ ...cellSx, maxWidth: 190, overflow: 'hidden' }}>
-                  <Typography sx={{ fontSize: 10, color: MOCK.text, lineHeight: 1.4 }}>{row.cliente}</Typography>
+                {/* En el celular el cliente se recorta con puntos suspensivos para que el estado quepa en la tarjeta */}
+                <Box component="td" sx={{ ...cellSx, maxWidth: { xs: 112, sm: 190 }, overflow: 'hidden' }}>
+                  <Typography noWrap sx={{ fontSize: 10, color: MOCK.text, lineHeight: 1.4 }}>
+                    {row.cliente}
+                  </Typography>
                   <SubText>{row.nit}</SubText>
                 </Box>
                 <Box component="td" sx={{ ...cellSx, ...hideSm }}>

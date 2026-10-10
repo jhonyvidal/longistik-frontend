@@ -1,5 +1,6 @@
 // @project
 import { AppScreen } from '@/components/app-mockup';
+import SvgIcon from '@/components/SvgIcon';
 import { ANCHOR } from '@/path';
 import { ctaDemo } from './botones';
 
@@ -124,7 +125,8 @@ export const feature21 = {
   caption:
     'Una API para que los clientes de tu transportadora radiquen despachos y sigan cada remesa, desde que se crea hasta que se factura. Menos llamadas, menos correos, más carga.',
   mockup: <AppScreen screen="dashboard" />,
-  primaryBtn: { ...ctaDemo },
+  // Mismo ícono que los demás botones de demo (el bloque trae uno de descarga por defecto)
+  primaryBtn: { ...ctaDemo, startIcon: <SvgIcon name="tabler-sparkles" size={16} stroke={3} color="background.default" /> },
   features: [
     { animationDelay: 0.1, icon: 'tabler-file-plus', title: 'Creación de remesas' },
     { animationDelay: 0.2, icon: 'tabler-search', title: 'Consulta de remesas' },
