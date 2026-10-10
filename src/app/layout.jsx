@@ -9,7 +9,9 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 
 // @project
 import ProviderWrapper from './ProviderWrapper';
+import JsonLd from '@/components/JsonLd';
 import { mainMetadata } from '@/metadata';
+import { grafo, organizacionLd, sitioLd, softwareLd } from '@/seo';
 
 const gaId = process.env.NEXT_PUBLIC_ANALYTICS_ID || '';
 
@@ -22,7 +24,7 @@ export const metadata = { ...mainMetadata };
 // Layout raíz que envuelve toda la aplicación
 export default function RootLayout({ children }) {
   return (
-    <html lang="es" suppressHydrationWarning>
+    <html lang="es-CO" suppressHydrationWarning>
       <head>
         {/* Nota: usar `gaId ? … : null` y no `gaId && …` — con la variable vacía, `&&` inyecta
             una cadena vacía como nodo de texto en <head> y rompe la hidratación. */}
@@ -34,6 +36,8 @@ export default function RootLayout({ children }) {
         ) : null}
       </head>
       <body>
+        {/* Quién es la empresa y qué es el producto, para buscadores y motores de IA */}
+        <JsonLd data={grafo(organizacionLd(), sitioLd(), softwareLd())} />
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
           <ProviderWrapper>{children}</ProviderWrapper>
         </AppRouterCacheProvider>

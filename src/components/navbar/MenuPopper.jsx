@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 
 import { useEffect, useRef, useState } from 'react';
 
+// @next
+import { usePathname } from 'next/navigation';
+
 // @mui
 import { useTheme } from '@mui/material/styles';
 import Button from '@mui/material/Button';
@@ -43,6 +46,18 @@ export default function MenuPopper({
       setAnchorEl(anchorRef.current);
     }
   }, [defaultOpen]);
+
+  // Cierra el menú al cambiar de página (incluye atrás/adelante del navegador)
+  const pathname = usePathname();
+  useEffect(() => {
+    setAnchorEl(null);
+  }, [pathname]);
+
+  // Cierra el menú al elegir una opción. Los enlaces a secciones (`/#modulos`) no cambian
+  // la ruta, así que hay que cerrarlo a mano cuando el clic cae sobre cualquier enlace.
+  const handleItemClick = (event) => {
+    if (event.target.closest('a')) setAnchorEl(null);
+  };
 
   const open = Boolean(anchorEl);
   const id = open ? 'menu-popper' : undefined;
@@ -90,7 +105,9 @@ export default function MenuPopper({
         anchorEl={anchorEl}
         transition
         sx={{ width: { xs: 1, md: 'auto' }, zIndex: 1201 }}
-        popperOptions={{ modifiers: [{ name: 'offset', options: { offset: [offsetX, offset] } }] }}
+        // `fixed` porque el botón que lo abre vive en un navbar fijo: con `absolute` el menú
+        // se reposiciona a destiempo durante el scroll y da saltos.
+        popperOptions={{ strategy: 'fixed', modifiers: [{ name: 'offset', options: { offset: [offsetX, offset] } }] }}
         {...(hoverToggler && { onMouseLeave: () => setAnchorEl(null) })}
       >
         {({ TransitionProps }) => (
@@ -112,7 +129,7 @@ export default function MenuPopper({
               }}
             >
               <ClickAwayListener onClickAway={() => setAnchorEl(null)}>
-                <Box>{children}</Box>
+                <Box onClick={handleItemClick}>{children}</Box>
               </ClickAwayListener>
             </Card>
           </Fade>

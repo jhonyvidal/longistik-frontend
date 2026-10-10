@@ -49,6 +49,16 @@ const data = [
     ]
   },
   {
+    id: 'recursos',
+    grid: { size: { xs: 6, sm: 'auto' } },
+    title: 'Recursos',
+    menu: [
+      { label: 'Simulador SICE-TAC', link: { href: PAGE_PATH.simulador } },
+      { label: 'Artículos sobre el RNDC', link: { href: PAGE_PATH.articulos } },
+      { label: 'Norma RNDC 2026', link: { href: ANCHOR.norma } }
+    ]
+  },
+  {
     id: 'ayuda',
     grid: { size: { xs: 6, sm: 'auto' } },
     title: 'Ayuda',

@@ -1,8 +1,11 @@
 // @project
 import branding from '@/branding.json';
 import { ctaVerde } from './botones';
+import { formatoCOP, planes, volumenPlan } from './planes';
 
 /***************************  LONGISTIK - PREGUNTAS FRECUENTES  ***************************/
+
+const [basico, profesional, aLaMedida] = planes;
 
 const primeraPregunta = '¿Longistik reemplaza al RNDC?';
 
@@ -24,6 +27,12 @@ export const faq = {
       category: 'RNDC'
     },
     {
+      question: '¿Longistik va a funcionar con el RNDC 360?',
+      answer:
+        'El Ministerio de Transporte anunció que el RNDC actual será reemplazado por el RNDC 360 desde el 1 de enero de 2027. Cuando el Ministerio publique las especificaciones técnicas, adaptamos la integración de Longistik: tú sigues trabajando en el mismo sistema, con tus mismos datos, sin migrar a otro software.',
+      category: 'RNDC'
+    },
+    {
       question: '¿Qué pasa si el RNDC se cae o rechaza un documento?',
       answer: {
         content:
@@ -39,10 +48,45 @@ export const faq = {
       category: 'RNDC'
     },
     {
+      question: '¿Longistik ya está al día con la Resolución 20263040016075 de 2026?',
+      answer:
+        'Longistik ya reporta al RNDC el flete en la factura electrónica, toma los tiempos logísticos del monitoreo GPS y traduce los errores del Ministerio. Estamos construyendo las validaciones nuevas: el flete contra el costo eficiente de SICE-TAC, el indicador de la regla del 20 % de cumplidos pendientes y el contador de anulaciones del mes. Mientras tanto, puedes hacer esas cuentas gratis en nuestro simulador.',
+      category: 'RNDC'
+    },
+    {
+      question: '¿El RNDC me puede impedir expedir manifiestos?',
+      answer:
+        'Sí. Si los cumplidos de manifiesto pendientes con más de 5 días hábiles desde la entrega superan el 20 % de los manifiestos que expediste en los últimos 30 días, el RNDC no deja generar manifiestos nuevos hasta que te pongas al día. Y rechaza cualquier manifiesto cuyo valor a pagar quede por debajo del costo eficiente de SICE-TAC.',
+      category: 'RNDC'
+    },
+    {
       question: '¿Necesito mi propio usuario del RNDC?',
       answer:
         'Sí. Longistik se conecta con las credenciales del web service que el Ministerio le asigna a tu empresa, y usa el NIT de tu compañía en cada reporte. Durante la implementación te acompañamos a dejar esa configuración lista.',
       category: 'RNDC'
+    },
+    {
+      question: '¿Necesito un software para el RNDC o puedo usar el portal del Ministerio?',
+      answer:
+        'Puedes registrar remesas, manifiestos y cumplidos directamente en la plataforma web del RNDC, pero ahí digitas cada documento a mano y la información queda solo en el sistema del Ministerio. Un software conectado al RNDC por web services, como Longistik, reporta solo lo que ya registraste en tu operación, guarda tu historial en tu propio sistema y lo conecta con la facturación, la contabilidad y tus clientes.',
+      category: 'RNDC'
+    },
+    {
+      question: '¿Qué es Longistik?',
+      answer: `Longistik es un software colombiano para empresas de transporte de carga por carretera, desarrollado por ${branding.company.name} en ${branding.company.city}, ${branding.company.state}. Genera remesas (guías), manifiestos electrónicos de carga y cumplidos, los reporta automáticamente al RNDC del Ministerio de Transporte, se integra con la facturación electrónica de la DIAN y con Siigo, World Office y Alegra, e incluye un asistente de inteligencia artificial. Se cobra por manifiestos al día, con usuarios ilimitados, desde ${formatoCOP(basico.precio)} COP al mes.`,
+      category: 'Producto'
+    },
+    {
+      question: '¿Cómo usa Longistik la inteligencia artificial?',
+      answer: {
+        content: 'La IA está integrada en el sistema, no es una herramienta aparte. Así la aprovechas según tu plan:',
+        type: 'list',
+        data: [
+          { primary: 'Todos los planes: asistente de IA dentro del software que resuelve tus dudas al instante, sin esperar a un asesor.' },
+          { primary: 'Plan A la medida: además, manejo de la operación con IA.' }
+        ]
+      },
+      category: 'Producto'
     },
     {
       question: '¿Qué tipo de carga maneja?',
@@ -102,8 +146,32 @@ export const faq = {
     },
     {
       question: '¿Cuánto cuesta?',
+      answer: {
+        content:
+          'Depende de cuántos manifiestos expides al día; remesas, cumplidos y anulaciones son ilimitados. No cobramos por usuario: todo tu equipo puede entrar. Implementación, migración y soporte con asistente de IA van incluidos, sin permanencia forzada.',
+        type: 'list',
+        data: [
+          { primary: `${basico.nombre}: ${formatoCOP(basico.precio)} COP al mes, ${volumenPlan(basico).toLowerCase()}.` },
+          {
+            primary: `${profesional.nombre}: ${formatoCOP(profesional.precio)} COP al mes, ${volumenPlan(profesional).toLowerCase()}, con cargue masivo, multiparada, cumplido con GPS e integraciones incluidas.`
+          },
+          {
+            primary: `${aLaMedida.nombre}: ${volumenPlan(aLaMedida).toLowerCase()}, servidor dedicado y manejo de la operación con IA, cotizados según tu volumen.`
+          }
+        ]
+      },
+      category: 'Soporte'
+    },
+    {
+      question: '¿Qué pasa si un día expido más de lo que cubre mi plan?',
       answer:
-        'El plan Operación arranca desde $650.000 COP al mes, con implementación, migración y acompañamiento incluidos, y sin permanencia forzada. Si necesitas integraciones con facturación, contabilidad, ERP o API para tus clientes, te enviamos una cotización a la medida después de la demo.',
+        'Nada se detiene: nunca bloqueamos una remesa ni un manifiesto por el plan, porque eso deja un camión parado. Si pasa con frecuencia, revisamos tu volumen contigo y te proponemos el plan que corresponde.',
+      category: 'Soporte'
+    },
+    {
+      question: '¿Cuántos usuarios puedo tener?',
+      answer:
+        'Los que necesites, en cualquier plan. Cada usuario entra con su propio rol y permisos. Lo que define el plan es cuántos manifiestos expides al día, no cuántas personas usan el sistema.',
       category: 'Soporte'
     }
   ]

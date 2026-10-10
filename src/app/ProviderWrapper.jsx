@@ -1,33 +1,23 @@
 'use client';
 import PropTypes from 'prop-types';
 
-import { useEffect, useState } from 'react';
-
 // @project
-import Loader from '@/components/Loader';
 import ThemeProvider from '@/components/ThemeProvider';
 import { ConfigProvider } from '@/contexts/ConfigContext';
 
 /***************************  COMMON - CONFIG, THEME  ***************************/
 
+/**
+ * Sin loader a propósito: la plantilla original ocultaba todo el contenido hasta montar en el
+ * navegador, y el HTML que recibían Google y los rastreadores de IA llegaba vacío. La única
+ * configuración guardada en localStorage es `themeDirection` (siempre 'ltr'), así que servidor
+ * y cliente renderizan lo mismo.
+ */
 export default function ProviderWrapper({ children }) {
-  const [loader, setLoader] = useState(true);
-
-  useEffect(() => {
-    setLoader(false);
-  }, []);
-
-  /**
-   * A loader is needed here to initialize the configuration from localStorage and set the default theme.
-   * Without a loader,
-   * the theme palette and fontFamily don't match, resulting in an error like:
-   * "Warning: Prop className did not match".
-   */
-
   return (
     <ConfigProvider>
       <ThemeProvider>
-        <main>{loader ? <Loader /> : children}</main>
+        <main>{children}</main>
       </ThemeProvider>
     </ConfigProvider>
   );

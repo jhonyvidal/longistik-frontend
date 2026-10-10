@@ -31,18 +31,26 @@ No hay tests ni TypeScript (`jsconfig.json` es solo para el alias `@/*` → `./s
 Variables de entorno en `.env` (ver `.env.example`). Las que importan:
 `NEXT_PUBLIC_METADATA_BASE` (dominio para URLs canónicas y Open Graph — **pendiente**),
 `DEMO_API_URL` y `DEMO_API_KEY` (backend del panel que recibe las solicitudes de demo; la llave debe coincidir con el setting `demo_api_key` del panel),
-`NEXT_PUBLIC_ANALYTICS_ID` (opcional; sin él no se carga ningún script de terceros).
+`NEXT_PUBLIC_ANALYTICS_ID` (opcional; sin él no se carga ningún script de terceros),
+`NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` y `NEXT_PUBLIC_BING_SITE_VERIFICATION` (metaetiquetas de Search Console y Bing Webmaster Tools),
+`INDEXNOW_KEY` (llave que sirve `/indexnow.txt`; después de publicar, `node scripts/indexnow.mjs` avisa a Bing de las URLs del sitemap).
+
+**SEO y motores de IA:** el análisis de palabras clave y el plan de contenido están en `docs/seo-palabras-clave.md`. `src/seo.js` arma el JSON-LD y los archivos para IA (`/llms.txt` y `/llms-full.txt`, que se generan solos con los datos del sitio); `src/app/robots.js` permite explícitamente a los rastreadores de IA.
 
 ## Estructura del sitio
 
-Solo 4 páginas (`src/app/(default)/`), todas con slugs en español:
+Páginas en `src/app/(default)/`, todas con slugs en español:
 
 | Ruta | Vista |
 |---|---|
 | `/` | `src/views/landings/default/index.jsx` |
 | `/contacto` | `.../contact.jsx` |
+| `/simulador-sice-tac` | `.../simulador.jsx` (lógica en `src/utils/normaRndc.js`) |
+| `/articulos` y `/articulos/[slug]` | `.../articulos.jsx` y `.../articulo.jsx` (contenido en `data/articulos.js`, generados en el build) |
 | `/politica-de-privacidad` | `.../privacy-policy.jsx` |
 | `/terminos-y-condiciones` | `.../terms-condition.jsx` |
+
+**Norma del RNDC (Resolución 20263040016075 de 2026).** El simulador, los artículos y la sección `#norma-2026` de la home (`data/norma.js`) citan esa resolución. Cualquier cifra nueva se verifica contra el texto oficial (`RESOLUCION_RNDC_2026_URL` en `path.js`). Las tarjetas de `data/norma.js` dicen «Disponible» o «En desarrollo»: no marcar como disponible nada que no esté en producción en el software.
 
 Más `src/app/api/demo/route.js`: proxy servidor a servidor hacia `POST /api/public/demo-requests` del backend del panel (repo ConfigPanel, contrato en `docs/demo-requests-api.md` de ese repo). Allá se valida (honeypot `website`, 5 por IP cada 10 min), se guarda el lead y se envían el aviso interno y la confirmación al prospecto. Este route reenvía la IP del visitante en `X-Client-IP` y le pasa al formulario 200/400/429 tal cual; cualquier otro error es 502.
 
@@ -92,7 +100,7 @@ Se usa en `data/hero.jsx` (pantalla de guías) y `data/feature.jsx` (una pantall
 
 ## Cosas que hay que saber antes de tocar
 
-- **Bloques modificados respecto a la plantilla.** `Hero17` (props `mockup` y `secondaryBtn`, iconos en `listData`), `Feature18` y `Feature21` (prop `mockup`), `Other1` (prop `icon` como alternativa a `image`), `Pricing9` (prop `priceLabel` para mostrar texto en vez de precio), `Cta4` y `Cta5` (las tarjetas laterales y el grupo de avatares son opcionales), `Faq6` (`categories` opcional). Al actualizar la plantilla original hay que reaplicar estos cambios.
+- **Bloques modificados respecto a la plantilla.** `Hero17` (props `mockup` y `secondaryBtn`, iconos en `listData`), `Feature18` y `Feature21` (prop `mockup`), `Other1` (prop `icon` como alternativa a `image`), `Pricing9` (prop `priceLabel` para mostrar texto en vez de precio; con más de 3 planes reparte en 4 columnas desde `lg`), `Cta4` y `Cta5` (las tarjetas laterales y el grupo de avatares son opcionales), `Faq6` (`categories` opcional). Al actualizar la plantilla original hay que reaplicar estos cambios.
 - **Enlaces de ancla.** Los que apuntan a una sección (`/#modulos`) se renderizan como `<a>` normal y no con `next/link` — ver `src/utils/anchorScroll.js`. El router de Next no desplaza la página cuando solo cambia el hash. Cada sección lleva `scrollMarginTop` para compensar el navbar fijo.
 - **Cuidado con `{variable && <jsx/>}` cuando la variable es un string.** Con `''`, React renderiza un nodo de texto vacío; dentro de `<head>` eso rompe la hidratación (pasó con `NEXT_PUBLIC_ANALYTICS_ID`). Usar `cond ? … : null`.
 - **Las secciones aparecen al hacer scroll** (`whileInView` de framer-motion, comportamiento original de la plantilla). En pestañas que se remontan hay que usar `animate` en su lugar, o el contenido se queda invisible.
@@ -105,8 +113,10 @@ Se usa en `data/hero.jsx` (pantalla de guías) y `data/feature.jsx` (una pantall
 
 - El dominio del sitio es **longistik.com**: falta poner `NEXT_PUBLIC_METADATA_BASE=https://longistik.com` en producción.
 - Cargar `DEMO_API_URL` y `DEMO_API_KEY` en producción (y la misma llave en el setting `demo_api_key` del panel).
+- Dar de alta el sitio en Google Search Console y Bing Webmaster Tools, cargar sus `NEXT_PUBLIC_*_SITE_VERIFICATION` e `INDEXNOW_KEY` en producción, y correr `node scripts/indexnow.mjs` después de cada publicación.
 - Política de privacidad: mencionar que los datos del formulario de demo se guardan y se usan para contactar al prospecto por correo (Ley 1581 de 2012).
 - Cifras reales, testimonio y logos de clientes.
-- Precio del plan grande (hoy "A la medida"; el básico es "desde $650.000 COP al mes", en `data/pricing.jsx`).
+- Planes de `data/pricing.jsx`: se cobra solo por manifiestos al día (remesas, cumplidos y anulaciones ilimitados), sin límite de usuarios. Decidido: tres planes: Básico $650.000 (hasta 50 manifiestos al día), Profesional $1.200.000 y A la medida por cotización. Falta validar el tope de Profesional (200 manifiestos al día). El manejo con IA es exclusivo del plan A la medida; el soporte con asistente de IA va en todos.
+- Cambiar a «Disponible» las tarjetas de `data/norma.js` a medida que salgan en el software (SICE-TAC, regla del 20 %, anulaciones).
 - Páginas propias para `/integraciones`, `/api` e `/implementacion` (hoy son anclas de la home), y URL pública de la documentación de la API.
 - El texto legal es un borrador y necesita revisión de un abogado.

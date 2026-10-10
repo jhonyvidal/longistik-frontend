@@ -1,68 +1,73 @@
 // @mui
+import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
 // @project
 import { ctaVerde } from './botones';
+import { formatoCOP, funciones, planes, volumenPlan } from './planes';
 
 /***************************  LONGISTIK - PLANES  ***************************/
 
 /**
- * Plan base con precio publicado ("desde $650.000 al mes"); el plan grande se cotiza a la medida.
- * El precio va en `priceLabel` (no en `price`) para mostrarlo con formato colombiano y la unidad.
- *
- * El reparto de `featuresID` entre planes es una propuesta, no una decisión comercial.
+ * Presentación de los planes. Precios, topes y funciones viven en `planes.js` (fuente única,
+ * también la leen los datos estructurados y el llms.txt).
+ * El precio va en `priceLabel` (no en `price`) para mostrarlo con formato colombiano, la unidad y el volumen.
  */
 
-function Precio({ valor, unidad }) {
+function Precio({ valor, unidad, detalle = [] }) {
   return (
     <>
       {valor}
       <Typography component="div" variant="body2" sx={{ color: 'text.secondary', mt: 0.5 }}>
         {unidad}
       </Typography>
+      {detalle.length > 0 && (
+        <Stack sx={{ gap: 0.25, mt: 2 }}>
+          {detalle.map((linea) => (
+            <Typography key={linea} component="div" variant="body2" sx={{ color: 'text.primary' }}>
+              {linea}
+            </Typography>
+          ))}
+        </Stack>
+      )}
     </>
   );
 }
 
+// Lo que cambia entre planes y no sale de los datos: etiquetas, botón y cuál se destaca
+const presentacion = {
+  basico: { active: false, featureTitle: 'Incluye', boton: 'Empezar con Básico', extra: 'Usuarios ilimitados' },
+  profesional: { active: true, featureTitle: 'Todo lo de Básico, más', boton: 'Empezar con Profesional', extra: 'Usuarios ilimitados' },
+  'a-la-medida': {
+    active: false,
+    featureTitle: 'Todo lo de Profesional, más',
+    boton: 'Solicitar cotización',
+    extra: 'Manejo de la operación con IA'
+  }
+};
+
 export const pricing = {
-  heading: 'Precios claros desde el primer día',
-  caption: 'Implementación, migración y acompañamiento incluidos. Sin permanencia forzada.',
-  features: [
-    { id: 1, label: 'Guías y manifiestos ilimitados' },
-    { id: 2, label: 'Reporte automático al RNDC' },
-    { id: 3, label: 'Cumplidos y anulaciones' },
-    { id: 4, label: 'Maestros: vehículos, terceros, rutas y tarifas' },
-    { id: 5, label: 'Informes de ventas y fletes' },
-    { id: 6, label: 'Usuarios con roles y permisos' },
-    { id: 11, label: 'Acompañamiento en la migración' },
-    { id: 7, label: 'Cargue masivo desde archivo' },
-    { id: 8, label: 'Cumplido asistido con monitoreo GPS' },
-    { id: 9, label: 'Manifiestos multiparada' },
-    { id: 13, label: 'Facturación electrónica DIAN y contabilidad (Siigo, World Office, Alegra)' },
-    { id: 10, label: 'API para tus clientes: crear, consultar, anular y rastrear remesas' },
-    { id: 14, label: 'Integración con SAP, Odoo o Salesforce' },
-    { id: 12, label: 'Soporte prioritario' }
-  ],
-  plans: [
-    {
-      title: 'Operación · desde',
-      priceLabel: <Precio valor="$650.000" unidad="COP al mes" />,
-      active: false,
-      animationDelay: 0.1,
-      featureTitle: 'Incluye',
-      content: 'Para transportadoras que quieren dejar ya el RNDC manual.',
-      exploreLink: ctaVerde('Empezar con Longistik'),
-      featuresID: [1, 2, 3, 4, 5, 6, 11]
-    },
-    {
-      title: 'Operación + Integraciones',
-      priceLabel: <Precio valor="A la medida" unidad="según tus integraciones" />,
-      active: true,
-      animationDelay: 0.2,
-      featureTitle: 'Todo lo anterior, más',
-      content: 'Para volúmenes altos, facturación conectada y clientes que radican sus propios despachos.',
-      exploreLink: ctaVerde('Solicitar cotización'),
-      featuresID: [1, 2, 3, 4, 5, 6, 11, 7, 8, 9, 13, 10, 14, 12]
-    }
-  ]
+  heading: 'Pagas según tu volumen, no por usuario',
+  caption:
+    'Cuentan solo los manifiestos que expides al día: remesas, cumplidos y anulaciones son ilimitados. Conecta a todo tu equipo sin pagar por usuario. Si un día tienes un pico, no te bloqueamos ningún documento. Implementación y migración incluidas, sin permanencia forzada.',
+  features: funciones,
+  plans: planes.map((plan, index) => {
+    const p = presentacion[plan.id];
+    return {
+      title: plan.nombre,
+      priceLabel: (
+        <Precio
+          valor={plan.precio ? formatoCOP(plan.precio) : 'Cotización'}
+          unidad={plan.precio ? 'COP al mes' : 'licencia + servidor dedicado'}
+          detalle={[volumenPlan(plan), p.extra]}
+        />
+      ),
+      active: p.active,
+      animationDelay: 0.1 * (index + 1),
+      featureTitle: p.featureTitle,
+      content: plan.para,
+      exploreLink: ctaVerde(p.boton),
+      featuresID: plan.funcionesID
+    };
+  })
 };

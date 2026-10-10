@@ -27,12 +27,15 @@ export const hero = {
       </>
     )
   },
-  headLine: 'Cumple con el RNDC sin pelear con el RNDC',
+  // H1 de la home: la señal más fuerte para Google. Lleva la marca y la búsqueda principal
+  // («software para transportadoras»), ver docs/seo-palabras-clave.md
+  headLine: 'Longistik, el software para transportadoras que reporta al RNDC por ti',
   captionLine:
-    'Longistik genera tus guías, manifiestos y cumplidos, los reporta solo al Ministerio de Transporte y los conecta con tu facturación electrónica, tu contabilidad y el sistema de tus clientes. Sin digitar dos veces y sin errores que nadie entiende.',
+    'Longistik es el software para empresas de transporte de carga que genera tus remesas (guías), manifiestos electrónicos de carga y cumplidos, los reporta solo al RNDC del Ministerio de Transporte y los conecta con tu facturación electrónica, tu contabilidad y el sistema de tus clientes. Y trae inteligencia artificial integrada para resolver tus dudas al instante, sin esperar a un asesor.',
   primaryBtn: { ...ctaDemo },
   secondaryBtn: { children: 'Ver los módulos', href: ANCHOR.modulos },
   listData: [
+    { icon: 'tabler-sparkles', title: 'Con IA' },
     { icon: 'tabler-file-text', title: 'Guías' },
     { icon: 'tabler-receipt', title: 'Manifiestos' },
     { icon: 'tabler-clipboard-check', title: 'Cumplidos' },

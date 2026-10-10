@@ -1,3 +1,4 @@
+export { articulos, buscarArticulo, formatoFecha } from './articulos';
 export { clientele, logoSx } from './clientele';
 export { contactUS } from './contact-us';
 export { cta4, cta5 } from './cta';
@@ -7,7 +8,8 @@ export { hero } from './hero';
 export { ecosistema, integration } from './integration';
 export { metrics } from './metrics';
 export { navbar } from './navbar';
+export { norma } from './norma';
 export { other } from './other';
 export { pricing } from './pricing';
-export { smallHeroPrivacidad, smallHeroTerminos } from './small-hero';
+export { smallHeroArticulos, smallHeroPrivacidad, smallHeroSimulador, smallHeroTerminos } from './small-hero';
 export { testimonial } from './testimonial';

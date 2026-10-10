@@ -29,6 +29,7 @@ import {
   hero,
   integration,
   metrics,
+  norma,
   other,
   pricing,
   testimonial
@@ -63,6 +64,10 @@ export default function Main() {
 
       <Box component="section" id={SECTION_ID.rndc} sx={anchorSx}>
         <Integration2 {...integration} />
+      </Box>
+
+      <Box component="section" id={SECTION_ID.norma} sx={anchorSx}>
+        <Feature20 {...norma} />
       </Box>
 
       <Box component="section" id={SECTION_ID.modulos} sx={anchorSx}>

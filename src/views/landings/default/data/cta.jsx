@@ -14,14 +14,14 @@ const whatsapp = whatsappUrl('Hola, quiero agendar una demo de Longistik.');
 /***************************  LONGISTIK - POR QUÉ NOSOTROS (CTA 4)  ***************************/
 
 export const cta4 = {
-  headLine: 'Un software que ya está operando, no una promesa',
+  headLine: 'Software moderno, con inteligencia artificial, que ya está operando',
   primaryBtn: { ...ctaDemo },
   list: [
     { primary: 'Desarrollando software desde 2017' },
     { primary: 'Despachando carga real todos los días' },
     { primary: 'Especialistas en transporte, no un ERP genérico' },
     { primary: 'Integrado con RNDC, DIAN y tu contabilidad' },
-    { primary: 'Migración y acompañamiento incluidos' },
+    { primary: 'Inteligencia artificial integrada en el sistema' },
     { primary: 'Soporte directo con quien desarrolla' }
   ],
   clientContent: 'Sin compromiso'

@@ -58,7 +58,8 @@ export default function Pricing9({ heading, caption, features, plans }) {
         )}
         <Grid container spacing={1.5} sx={{ height: 1, justifyContent: 'center' }}>
           {plans.map((plan, index) => (
-            <Grid key={index} size={{ xs: 12, sm: 6, md: 4 }}>
+            // Con 4 planes: dos columnas hasta `lg` y cuatro desde ahí; con 3 o menos, el reparto original
+            <Grid key={index} size={plans.length > 3 ? { xs: 12, sm: 6, lg: 3 } : { xs: 12, sm: 6, md: 4 }}>
               <motion.div
                 key={index}
                 initial={{ opacity: 0, x: index === 0 ? -60 : index === 2 ? 60 : 0, y: 0, scale: index === 1 ? 0.9 : 1 }}

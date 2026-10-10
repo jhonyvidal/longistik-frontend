@@ -83,8 +83,11 @@ export default function NavbarContent10({ landingBaseUrl, navItems, primaryBtn, 
               <ContainerWrapper
                 sx={{
                   height: 'auto',
-                  maxHeight: { xs: `calc(100vh - ${navbar10Height.xs}px)`, sm: `calc(100vh - ${navbar10Height.sm}px)` },
-                  overflowY: 'auto'
+                  // `dvh` descuenta la barra de direcciones del móvil, que cambia de alto al hacer scroll
+                  maxHeight: { xs: `calc(100dvh - ${navbar10Height.xs}px)`, sm: `calc(100dvh - ${navbar10Height.sm}px)` },
+                  overflowY: 'auto',
+                  // el scroll dentro del menú no se transmite a la página de fondo
+                  overscrollBehavior: 'contain'
                 }}
               >
                 {navItems && (
