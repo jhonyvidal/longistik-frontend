@@ -57,7 +57,7 @@ export const feature18 = {
   topics: [
     {
       icon: 'tabler-file-text',
-      title: 'Guías',
+      title: 'Remesas',
       title2: 'Expide remesas en un solo formulario',
       description: 'Cliente, remitente, destinatario, producto y tarifa en una sola pantalla, con el consecutivo listo.',
       mockup: <AppScreen screen="guias" chrome={false} fill />,
@@ -65,7 +65,7 @@ export const feature18 = {
         { primary: 'Consecutivo RM automático, sin saltos ni duplicados' },
         { primary: 'Envío al RNDC en segundo plano, sin bloquear al operador' },
         { primary: 'Estado visible: creada, en manifiesto, en ruta, cumplida' },
-        { primary: 'Guía en PDF con código de barras lista para imprimir' }
+        { primary: 'Remesa en PDF con código de barras lista para imprimir' }
       ],
       actionBtn: { ...ctaDemo }
     },

@@ -194,7 +194,7 @@ export default function DemoForm() {
                 {...register('message', messageSchema)}
                 multiline
                 rows={4}
-                placeholder="Ej. generamos unas 300 guías al mes, todo lo digitamos directamente en el RNDC…"
+                placeholder="Ej. generamos unas 300 remesas al mes, todo lo digitamos directamente en el RNDC…"
                 fullWidth
                 error={Boolean(errors.message)}
                 slotProps={{ input: { 'aria-label': 'Mensaje' } }}

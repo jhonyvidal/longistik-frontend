@@ -31,9 +31,9 @@ export const SIDEBAR_MENU = [
   { icon: 'tabler-circle-check', label: 'Maestros', expandable: true },
   { icon: 'tabler-chart-bar', label: 'Informes', expandable: true, screen: 'dashboard-informes' },
   { icon: 'tabler-circle-check', label: 'Despachos', expandable: true, open: true },
-  { icon: 'tabler-file-text', label: 'Guía', child: true, screen: 'guias' },
+  { icon: 'tabler-file-text', label: 'Remesa', child: true, screen: 'guias' },
   { icon: 'tabler-receipt', label: 'Manifiesto', child: true, screen: 'manifiestos' },
-  { icon: 'tabler-clipboard-check', label: 'Cumplido Guía', child: true, screen: 'cumplido' },
+  { icon: 'tabler-clipboard-check', label: 'Cumplido Remesa', child: true, screen: 'cumplido' },
   { icon: 'tabler-upload', label: 'Importación Masiva', child: true }
 ];
 

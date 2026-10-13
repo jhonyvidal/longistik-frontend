@@ -117,7 +117,7 @@ const menuItems = [
     id: 'datos-de-la-operacion',
     heading: 'Datos operativos de nuestros clientes',
     caption:
-      'La información que las empresas transportadoras registran dentro de Longistik (guías, manifiestos, terceros, vehículos) es de su propiedad. DEBUGPLOY S.A.S. actúa únicamente como encargado del tratamiento para prestar el servicio y para cumplir el reporte obligatorio ante el RNDC del Ministerio de Transporte, en los términos del contrato suscrito con cada cliente.'
+      'La información que las empresas transportadoras registran dentro de Longistik (remesas, manifiestos, terceros, vehículos) es de su propiedad. DEBUGPLOY S.A.S. actúa únicamente como encargado del tratamiento para prestar el servicio y para cumplir el reporte obligatorio ante el RNDC del Ministerio de Transporte, en los términos del contrato suscrito con cada cliente.'
   },
   {
     id: 'seguridad',

@@ -115,7 +115,7 @@ function pageMeta({ title: pageTitle, description: pageDescription, path }) {
 export const SEO_CONTENT = {
   contactUs: pageMeta({
     title: 'Agenda una demo',
-    description: `Cuéntanos cómo opera tu empresa de transporte y te mostramos ${branding.brandName} funcionando con tu propio flujo de guías y manifiestos.`,
+    description: `Cuéntanos cómo opera tu empresa de transporte y te mostramos ${branding.brandName} funcionando con tu propio flujo de remesas y manifiestos.`,
     path: PAGE_PATH.contactPage
   }),
   privacyPolicy: pageMeta({

@@ -303,7 +303,7 @@ export const articulos = [
     slug: 'remesa-terrestre-de-carga',
     titulo: 'Remesa terrestre de carga: qué es, qué datos lleva y qué valida el RNDC',
     resumen:
-      'La remesa, o guía, es el primer registro de cada despacho en el RNDC. Qué datos pide la norma, qué tipos hay y las validaciones que más rechazos generan.',
+      'La remesa es el primer registro de cada despacho en el RNDC. Qué datos pide la norma, qué tipos hay y las validaciones que más rechazos generan.',
     fecha: '2026-10-10',
     lectura: '5 min',
     secciones: [

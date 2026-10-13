@@ -22,6 +22,7 @@ export function articuloPath(slug) {
 // Se usan en el navbar y en los CTA para saltar a cada sección de la landing.
 export const SECTION_ID = {
   funcionalidades: 'funcionalidades',
+  demo: 'demo',
   modulos: 'modulos',
   rndc: 'rndc',
   norma: 'norma-2026',
@@ -29,6 +30,7 @@ export const SECTION_ID = {
   api: 'api',
   clientes: 'clientes',
   planes: 'planes',
+  comoEmpezamos: 'como-empezamos',
   faq: 'faq'
 };
 

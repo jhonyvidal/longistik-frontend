@@ -228,7 +228,7 @@ export const headCellSx = {
   bgcolor: MOCK.card
 };
 
-// Segunda línea de una celda (el ID bajo la guía, el NIT bajo el cliente…).
+// Segunda línea de una celda (el ID bajo la remesa, el NIT bajo el cliente…).
 export function SubText({ children }) {
   return <Typography sx={{ fontSize: 8.5, color: MOCK.muted, lineHeight: 1.5 }}>{children}</Typography>;
 }

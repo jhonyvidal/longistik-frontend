@@ -223,7 +223,7 @@ export function llmsTxt() {
     '',
     '## Qué hace',
     '',
-    '- Expide remesas terrestres de carga (guías) y manifiestos electrónicos de carga, con consecutivos automáticos.',
+    '- Expide remesas terrestres de carga y manifiestos electrónicos de carga, con consecutivos automáticos.',
     '- Reporta remesas, manifiestos, cumplidos y anulaciones al RNDC por web services, sin entrar al portal del Ministerio.',
     '- Si el RNDC se cae o rechaza un documento, lo deja pendiente con el error traducido a lenguaje claro y permite reenviarlo.',
     '- Toma los tiempos logísticos de cargue y descargue del monitoreo GPS para el cumplido.',

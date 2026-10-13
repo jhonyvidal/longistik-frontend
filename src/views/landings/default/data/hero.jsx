@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import { AppScreen } from '@/components/app-mockup';
 import { ANCHOR } from '@/path';
 import { ctaDemo } from './botones';
+import { hayVideo } from './video-demo';
 
 /***************************  LONGISTIK - HERO  ***************************/
 
@@ -31,12 +32,13 @@ export const hero = {
   // («software para transportadoras»), ver docs/seo-palabras-clave.md
   headLine: 'Longistik, el software para transportadoras que reporta al RNDC por ti',
   captionLine:
-    'Longistik es el software para empresas de transporte de carga que genera tus remesas (guías), manifiestos electrónicos de carga y cumplidos, los reporta solo al RNDC del Ministerio de Transporte y los conecta con tu facturación electrónica, tu contabilidad y el sistema de tus clientes. Y trae inteligencia artificial integrada para resolver tus dudas al instante, sin esperar a un asesor.',
+    'Longistik es el software para empresas de transporte de carga que genera tus remesas, manifiestos electrónicos de carga y cumplidos, los reporta solo al RNDC del Ministerio de Transporte y los conecta con tu facturación electrónica, tu contabilidad y el sistema de tus clientes. Y trae inteligencia artificial integrada para resolver tus dudas al instante, sin esperar a un asesor.',
   primaryBtn: { ...ctaDemo },
-  secondaryBtn: { children: 'Ver los módulos', href: ANCHOR.modulos },
+  // Con video publicado, el segundo botón lleva a verlo funcionando; si no, a los módulos
+  secondaryBtn: hayVideo ? { children: 'Ver cómo funciona', href: ANCHOR.demo } : { children: 'Ver los módulos', href: ANCHOR.modulos },
   listData: [
     { icon: 'tabler-sparkles', title: 'Con IA' },
-    { icon: 'tabler-file-text', title: 'Guías' },
+    { icon: 'tabler-file-text', title: 'Remesas' },
     { icon: 'tabler-receipt', title: 'Manifiestos' },
     { icon: 'tabler-clipboard-check', title: 'Cumplidos' },
     { icon: 'tabler-file-invoice', title: 'Facturación' },

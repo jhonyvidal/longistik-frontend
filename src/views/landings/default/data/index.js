@@ -13,3 +13,6 @@ export { other } from './other';
 export { pricing } from './pricing';
 export { smallHeroArticulos, smallHeroPrivacidad, smallHeroSimulador, smallHeroTerminos } from './small-hero';
 export { testimonial } from './testimonial';
+export { casoExito, hayCaso } from './caso-exito';
+export { proceso } from './proceso';
+export { hayVideo, videoDemo } from './video-demo';

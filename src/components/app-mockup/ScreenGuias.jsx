@@ -31,8 +31,8 @@ export default function ScreenGuias() {
   return (
     <>
       <PageHeader
-        title="Guía"
-        subtitle="Guía"
+        title="Remesa"
+        subtitle="Remesa"
         right={
           <Stack direction="row" sx={{ gap: 0.75, display: { xs: 'none', sm: 'flex' } }}>
             <MockButton label="Descargar" icon="tabler-download" tone="ghost" />
@@ -41,7 +41,7 @@ export default function ScreenGuias() {
       />
 
       <MockCard>
-        <CardHeader title="Guías de Transporte" count={GUIAS_TOTAL} />
+        <CardHeader title="Remesas de Transporte" count={GUIAS_TOTAL} />
 
         <Box component="table" sx={{ width: 1, borderCollapse: 'collapse' }}>
           <Box component="thead">
@@ -50,7 +50,7 @@ export default function ScreenGuias() {
                 Acciones
               </Box>
               <Box component="th" sx={headCellSx}>
-                Guía
+                Remesa
               </Box>
               <Box component="th" sx={headCellSx}>
                 Cliente

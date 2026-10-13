@@ -11,7 +11,7 @@ export const other = {
   sections: [
     {
       animationDelay: 0.2,
-      title: 'Guías',
+      title: 'Remesas',
       subTitle: 'Remesas terrestres de carga',
       icon: 'tabler-file-text',
       link: ANCHOR.funcionalidades
@@ -40,7 +40,7 @@ export const other = {
     {
       animationDelay: 0.3,
       title: 'Rutas y tarifas',
-      subTitle: 'Fletes, guías y productos',
+      subTitle: 'Fletes, remesas y productos',
       icon: 'tabler-route',
       link: ANCHOR.funcionalidades
     },

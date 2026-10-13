@@ -21,6 +21,9 @@
     "whatsapp": "573135959528",
     "phone": "+57 313 595 9528"
   },
+  "app": {
+    "loginUrl": ""
+  },
   "logo": {
     "main": "/assets/images/longistik/logo.png",
     "logoIcon": "/assets/images/longistik/icon.png",

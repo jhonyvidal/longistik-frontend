@@ -4,9 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Escribe el contenido del sitio y los comentarios de código nuevos en **español** (el sitio es para clientes colombianos).
 
+Vocabulario: se dice **remesa**, no «guía», como en la norma del Ministerio de Transporte (los identificadores internos como `guias` o `ScreenGuias` se quedan así).
+
 ## Qué es esto
 
-Sitio de marketing de **Longistik**, el software de gestión logística de **DEBUGPLOY S.A.S.** (NIT 901714840-3, Palmira, Valle del Cauca) para empresas de transporte de carga en Colombia. El producto genera guías (remesas), manifiestos y cumplidos, y los reporta automáticamente al **RNDC** del Ministerio de Transporte vía web services SOAP.
+Sitio de marketing de **Longistik**, el software de gestión logística de **DEBUGPLOY S.A.S.** (NIT 901714840-3, Palmira, Valle del Cauca) para empresas de transporte de carga en Colombia. El producto genera remesas, manifiestos y cumplidos, y los reporta automáticamente al **RNDC** del Ministerio de Transporte vía web services SOAP.
 
 Partió de la plantilla gratuita SaasAble (React + MUI), a la que se le quitó el catálogo de bloques y se le reemplazó todo el contenido. El diseño de la plantilla se conserva a propósito: **cambiar contenido, no diseño**, salvo que se pida explícitamente.
 
@@ -96,7 +98,7 @@ Además:
 
 La estructura de cada pantalla (títulos, columnas, contadores, estados en mayúscula, celdas de dos líneas) replica las capturas reales. Si el software cambia, comparar contra `docs/capturas-software/` antes de tocar el mockup.
 
-Se usa en `data/hero.jsx` (pantalla de guías) y `data/feature.jsx` (una pantalla por pestaña, y el dashboard en Feature21).
+Se usa en `data/hero.jsx` (pantalla de remesas) y `data/feature.jsx` (una pantalla por pestaña, y el dashboard en Feature21).
 
 ## Cosas que hay que saber antes de tocar
 

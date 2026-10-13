@@ -88,7 +88,7 @@ export default function ScreenCumplido() {
   return (
     <>
       <PageHeader
-        title="Cumplido Guía"
+        title="Cumplido Remesa"
         subtitle="Cumplido"
         right={
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
@@ -101,7 +101,7 @@ export default function ScreenCumplido() {
         {/* datos de la remesa */}
         <Grid container spacing={1} sx={{ mb: 1.25 }}>
           <Grid size={{ xs: 6, sm: 3 }}>
-            <Field label="Guía" value={CUMPLIDO.guia} />
+            <Field label="Remesa" value={CUMPLIDO.guia} />
           </Grid>
           <Grid size={{ xs: 6, sm: 3 }}>
             <Field label="Manifiesto" value={CUMPLIDO.manifiesto} />

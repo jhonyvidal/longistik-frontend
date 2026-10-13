@@ -39,7 +39,7 @@ export const faq = {
           'La operación no se detiene. El registro se guarda en Longistik y queda marcado como pendiente de reporte, con el mensaje que devolvió el Ministerio traducido a lenguaje claro.',
         type: 'list',
         data: [
-          { primary: 'La guía o el manifiesto quedan creados, no se pierden.' },
+          { primary: 'La remesa o el manifiesto quedan creados, no se pierden.' },
           { primary: 'Ves exactamente qué documentos faltan por reportar.' },
           { primary: 'Los reenvías sin volver a digitar nada.' },
           { primary: 'Queda registro de cada intento para auditoría.' }
@@ -73,7 +73,7 @@ export const faq = {
     },
     {
       question: '¿Qué es Longistik?',
-      answer: `Longistik es un software colombiano para empresas de transporte de carga por carretera, desarrollado por ${branding.company.name} en ${branding.company.city}, ${branding.company.state}. Genera remesas (guías), manifiestos electrónicos de carga y cumplidos, los reporta automáticamente al RNDC del Ministerio de Transporte, se integra con la facturación electrónica de la DIAN y con Siigo, World Office y Alegra, e incluye un asistente de inteligencia artificial. Se cobra por manifiestos al día, con usuarios ilimitados, desde ${formatoCOP(basico.precio)} COP al mes.`,
+      answer: `Longistik es un software colombiano para empresas de transporte de carga por carretera, desarrollado por ${branding.company.name} en ${branding.company.city}, ${branding.company.state}. Genera remesas, manifiestos electrónicos de carga y cumplidos, los reporta automáticamente al RNDC del Ministerio de Transporte, se integra con la facturación electrónica de la DIAN y con Siigo, World Office y Alegra, e incluye un asistente de inteligencia artificial. Se cobra por manifiestos al día, con usuarios ilimitados, desde ${formatoCOP(basico.precio)} COP al mes.`,
       category: 'Producto'
     },
     {
@@ -95,9 +95,9 @@ export const faq = {
       category: 'Producto'
     },
     {
-      question: '¿Puedo cargar muchas guías de una vez?',
+      question: '¿Puedo cargar muchas remesas de una vez?',
       answer:
-        'Sí. Puedes subir un archivo plano con todas las remesas del día. Longistik primero valida fila por fila y te muestra qué está bien y qué no; solo cuando confirmas se crean las guías y se reportan al RNDC. Varias filas con la misma referencia se agrupan en una sola guía con varios ítems.',
+        'Sí. Puedes subir un archivo plano con todas las remesas del día. Longistik primero valida fila por fila y te muestra qué está bien y qué no; solo cuando confirmas se crean las remesas y se reportan al RNDC. Varias filas con la misma referencia se agrupan en una sola remesa con varios ítems.',
       category: 'Producto'
     },
     {
@@ -136,7 +136,7 @@ export const faq = {
     {
       question: '¿Qué pasa con la información que ya tengo?',
       answer:
-        'La migramos. Los maestros se cargan al sistema y los consecutivos de guías y manifiestos se configuran para que continúen desde el último número que tienes reportado en el RNDC, sin saltos ni duplicados.',
+        'La migramos. Los maestros se cargan al sistema y los consecutivos de remesas y manifiestos se configuran para que continúen desde el último número que tienes reportado en el RNDC, sin saltos ni duplicados.',
       category: 'Implementación'
     },
     {
